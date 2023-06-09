@@ -1,11 +1,11 @@
-## cricket-predictions
+# cricket-predictions
 
-# Local usage
+### Local usage
 Requirements: anaconda
 - bash deploy.sh
-- ./test.sh
+- bash test.sh
 
-# Docker
+### Docker
 Requirements: docker 
 - docker build -t cricket_model .
 - docker run -it cricket_model
