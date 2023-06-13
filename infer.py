@@ -3,11 +3,14 @@ from joblib import load
 import numpy as np
 import argparse
 
+
 def infer(args):
     df = pd.read_csv(args.data_path)
 
-    if (args.test):
-        df = df[(df["team"] == "Ireland") & (df["over"] < 5) & (df["matchid"] == 1029001)]
+    if args.test:
+        df = df[
+            (df["team"] == "Ireland") & (df["over"] < 5) & (df["matchid"] == 1029001)
+        ]
 
     X = np.sqrt(
         np.array(
@@ -26,9 +29,21 @@ def infer(args):
 
     model = load(args.model_path)
     out = model.predict(X)
-    
-    df['predicted_runs'] = out
-    print(df[['innings', 'remaining_overs', 'remaining_wickets', 'runs', 'predicted_runs']].to_string(index=False))
+
+    df["predicted_runs"] = out
+    print(
+        df[
+            [
+                "team",
+                "innings",
+                "remaining_overs",
+                "remaining_wickets",
+                "runs",
+                "predicted_runs",
+            ]
+        ].to_string(index=False)
+    )
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -45,7 +60,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--test",
         help="Test the script with the first 5 Irelands overs",
-        action='store_true',
+        action="store_true",
     )
     args = parser.parse_args()
     infer(args)
