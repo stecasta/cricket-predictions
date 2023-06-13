@@ -8,9 +8,7 @@ def infer(args):
     df = pd.read_csv(args.data_path)
 
     if args.test:
-        df = df[
-            (df["team"] == "Ireland") & (df["over"] < 5) & (df["matchid"] == 1029001)
-        ]
+        df = df[df["team"] == "Ireland"][:5]
 
     X = np.sqrt(
         np.array(
@@ -19,7 +17,7 @@ def infer(args):
                     "remaining_overs",
                     "remaining_wickets",
                     "innings",
-                    "cumulative_runs",
+                    "runs_cumul",
                     "runs_needed_to_par",
                     "last_5_overs_mean_runs",
                 ]
@@ -34,6 +32,7 @@ def infer(args):
     print(
         df[
             [
+                "matchid",
                 "team",
                 "innings",
                 "remaining_overs",
