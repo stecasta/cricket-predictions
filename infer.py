@@ -10,20 +10,16 @@ def infer(args):
     if args.test:
         df = df[df["team"] == "Ireland"][:5]
 
-    X = np.sqrt(
-        np.array(
-            df[
-                [
-                    "remaining_overs",
-                    "remaining_wickets",
-                    "innings",
-                    "runs_cumul",
-                    "runs_needed_to_par",
-                    "last_5_overs_mean_runs",
-                ]
-            ]
-        )
-    )
+    X = df[
+        [
+            "remaining_overs",
+            "remaining_wickets",
+            "last_5_overs_mean_runs",
+            "runs_cumul",
+            "runs_needed_to_par",
+            "innings",
+        ]
+    ]
 
     model = load(args.model_path)
     out = model.predict(X)
