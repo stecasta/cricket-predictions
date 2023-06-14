@@ -7,5 +7,6 @@ Requirements: anaconda
 
 ### Docker
 Requirements: docker 
-- docker build -t cricket_model .
-- docker run -it cricket_model
+- docker build -t cricket_model docker/
+- docker run -it cricket_model bash
+- (inside container) python infer.py --test
